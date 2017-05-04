@@ -1,8 +1,10 @@
 <?php
 session_start();
 require_once '../includes/functions/helpers.php';
+require_once '../includes/functions/validation.php';
 
 $helpers = new helpers();
+$validation = new validation();
 
 if (isset($_POST["submit"]))
 {
@@ -10,8 +12,16 @@ if (isset($_POST["submit"]))
     $position = (int) $_POST["position"];
     $visible = (int) $_POST["visible"];
 
-    $result = $helpers->insertSubject($menu_name, $position, $visible);
-    
+    $required_fields = ["menu_name", "position", "visible"];
+    $validation->validate_presences($required_fields);
+
+    if (!empty($validation->errors))
+    {
+        $_SESSION["errors"] = $validation->errors;
+        $helpers->redirectTo("new_subject.php");
+    }
+
+    $result = $helpers->insertSubject($menu_name, $position, $visible);  
 
     if ($result)
     {
