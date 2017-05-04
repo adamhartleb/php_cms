@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
+/* GENERAL STYLES */
+
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +14,12 @@ body {
 }
 
 ul {
-  list-style: none;
+  list-style-type: none;
+}
+
+a {
+  color: #777;
+  text-decoration: none;
 }
 
 .container {
@@ -34,25 +41,50 @@ ul {
   line-height: 75px;
 }
 
+/* NAVIGATION STYLES */
+
+.navigation {
+  flex: 1;
+  background-color: #FFF;
+  border-right: 1px solid #EEE;
+  padding: 30px;
+}
+
+.navigation ul {
+  text-align: right;
+}
+
+.navigation > ul > li {
+  margin-bottom: 14px;
+}
+
+.sub-navigation {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+/* MAIN AND PAGE STYLES */
+
 .main {
   display: flex;
   flex-direction: row;
   height: calc(100vh - 75px - 75px);
 }
 
-.navigation {
-  flex: 1;
-  text-align: center;
-  background-color: #FFF;
-  border-right: 1px solid #EEE;
-  padding: 30px;
-}
-
 .page {
-  flex: 6;
+  flex: 8;
   padding: 30px;
 }
 
 .page > * {
   margin-bottom: 14px;
 }
+
+.selected {
+  font-weight: bold;
+}
+
+.selected > a {
+  color: black;
+}
+

@@ -1,3 +1,16 @@
 <div class="navigation">
-  <h2>Widget Corp</h2>
+  <ul>
+    {% for name in subjects %}
+      <li class="{{ name.id == subject_id ? 'selected' : '' }}">
+        <a href="manage_content.php?subject={{name.id}}">{{ name.menu_name }}</a>
+        <ul class="sub-navigation">
+          {% for page in pages[name.id] %}
+            <li class="{{ page.id == page_id ? 'selected' : '' }}">
+              <a href="manage_content.php?page={{page.id}}">{{ page.menu_name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
 </div>

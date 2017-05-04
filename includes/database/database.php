@@ -23,6 +23,7 @@ class database extends \mysqli
         {
           $res[] = $row;
         }
+        $this->close();
         return $res;
       }
     }
