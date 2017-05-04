@@ -2,7 +2,7 @@
 
 require 'database.php';
 
-$db = new database('test');
+$db = new database('widget_corp');
 
 $sql = "CREATE TABLE admins (";
 $sql .= "id INT(11) NOT NULL AUTO_INCREMENT, ";

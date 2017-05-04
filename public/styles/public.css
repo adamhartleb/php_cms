@@ -20,6 +20,8 @@ ul {
   margin: 0 auto;
 }
 
+/* HEADER AND FOOTER STYLES */
+
 .header, .footer {
   width: 100%;
   height: 75px;
