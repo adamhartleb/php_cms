@@ -1,10 +1,9 @@
 <?php
 
-require( dirname(__FILE__) . '/../database/database.php');
+require_once dirname(__FILE__) . '/../database/database.php';
 
-function getSubjects ()
+function getSubjects ($db)
 {
-  $db = new database('widget_corp');
   $query  = "SELECT * ";
   $query .= "FROM subjects ";
   $query .= "WHERE visible = 1 ";
@@ -12,9 +11,8 @@ function getSubjects ()
   return $db->returnResults($query);
 }
 
-function getPages ($id)
+function getPages ($db, $id)
 {
-  $db = new database('widget_corp');
   $query  = "SELECT * ";
   $query .= "FROM pages ";
   $query .= "WHERE visible = 1 ";
@@ -23,13 +21,14 @@ function getPages ($id)
   return $db->returnResults($query);
 }
 
-function indexSubjectsAndPages ()
+function indexSubjectsAndPages ($db)
 {
-  $subjects = getSubjects();
+  
+  $subjects = getSubjects($db);
 
   foreach ($subjects as $subject)
   {
-    $pages[$subject['id']] = getPages($subject['id']);
+    $pages[$subject['id']] = getPages($db, $subject['id']);
   }
 
   return [$subjects, $pages];

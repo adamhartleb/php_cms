@@ -7,7 +7,8 @@ $loader = new Twig_Loader_Filesystem('../includes/templates');
 $twig = new Twig_Environment($loader);
 $template = $twig->load('manage_content.twig.html');
 
-$subjectAndPages = indexSubjectsAndPages();
+$db = new database('test');
+$subjectAndPages = indexSubjectsAndPages($db);
 $selectedSubjectAndPage = selectedSubjectAndPage();
 
 echo $template->render([
