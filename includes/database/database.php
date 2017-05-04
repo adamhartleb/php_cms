@@ -11,6 +11,24 @@ class database extends \mysqli
     }
   }
 
+  function query ($sql, ...$args)
+  {
+      foreach ($args as &$value)
+      {
+        $value = $this->escape_string($value);
+      }
+
+      $sql = vsprintf($sql, $args);
+
+      $result = parent::query($sql);
+      if (!$result)
+      {
+        error_log("complete query: " . $sql);
+        throw new \Exception(sprintf("Error in query \"%s\". Error message: %s\n", $sql, $this->error));
+      }
+      return $result;
+  }
+
   function returnResults ($sql)
   {
     $results = $this->query($sql);
@@ -26,5 +44,27 @@ class database extends \mysqli
         return $res;
       }
     }
+  }
+
+  function returnResultsIndexed ($sql, $index)
+  {
+    $results = $this->query($sql);
+
+    if (is_object($results))
+    {
+      if ($results->num_rows)
+      {
+        while ($row = $results->fetch_assoc())
+        {
+          $res[$row[$index]] = $row;
+        }
+        return $res;
+      }
+    }
+  }
+
+  function escape_string ($str)
+  {
+    return parent::real_escape_string($str);
   }
 }

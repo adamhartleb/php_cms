@@ -2,50 +2,68 @@
 
 require_once dirname(__FILE__) . '/../database/database.php';
 
-function getSubjects ($db)
-{
-  $query  = "SELECT * ";
-  $query .= "FROM subjects ";
-  $query .= "WHERE visible = 1 ";
-  $query .= "ORDER BY position ASC";
-  return $db->returnResults($query);
-}
+class helpers {
+    function __construct ()
+    {
+        $this->db = new database('test');
+    }
 
-function getPages ($db, $id)
-{
-  $query  = "SELECT * ";
-  $query .= "FROM pages ";
-  $query .= "WHERE visible = 1 ";
-  $query .= "AND subject_id = {$id} ";
-  $query .= "ORDER BY position ASC";
-  return $db->returnResults($query);
-}
+    function getSubjects ()
+    {
+        $query  = "SELECT * ";
+        $query .= "FROM subjects ";
+        $query .= "WHERE visible = 1 ";
+        $query .= "ORDER BY position ASC";
+        return $this->db->returnResults($query);
+    }
 
-function indexSubjectsAndPages ($db)
-{
-  
-  $subjects = getSubjects($db);
+    function getPages ($id)
+    {
+        $query  = "SELECT * ";
+        $query .= "FROM pages ";
+        $query .= "WHERE visible = 1 ";
+        $query .= "AND subject_id = {$id} ";
+        $query .= "ORDER BY position ASC";
+        return $this->db->returnResultsIndexed($query, 'id');
+    }
 
-  foreach ($subjects as $subject)
-  {
-    $pages[$subject['id']] = getPages($db, $subject['id']);
-  }
+    function insertSubject ($menu_name, $position, $visible)
+    {
+        $query  = "INSERT INTO subjects (";
+        $query .= "menu_name, position, visible";
+        $query .= ") VALUES (";
+        $query .= "'{$menu_name}', {$position}, {$visible}";
+        $query .= ")";
+        return $this->db->query($query, $menu_name, $position, $visible);
+    }
 
-  return [$subjects, $pages];
-}
+    function subjectsAndPages ()
+    {
+        $subjects = $this->getSubjects();
 
-function selectedSubjectAndPage ()
-{
-  if (isset($_GET['subject'])) {
-    $selected_subject_id = $_GET['subject'];
-    $selected_page_id = null;
-  } elseif (isset($_GET['page'])) {
-    $selected_subject_id = null;
-    $selected_page_id = $_GET['page'];
-  } else {
-    $selected_subject_id = null;
-    $selected_page_id = null;
-  }
+        foreach ($subjects as $subject)
+        {
+            $pages[$subject['id']] = $this->getPages($subject['id']);
+        }
 
-  return [$selected_subject_id, $selected_page_id];
+        return [ "subjects" => $subjects, "pages" => $pages];
+    }
+
+    function selectedSubjectAndPage ()
+    {
+        return [ "subject_id" => $_GET['subject'], "page_id" => $_GET['page']];
+    }
+
+    function prettyPrint ($data)
+    {
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+    }
+
+    function redirectTo ($location)
+    {
+        header("Location:" . $location);
+        exit;
+    }
 }

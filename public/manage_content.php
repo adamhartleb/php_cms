@@ -1,19 +1,19 @@
 <?php
-
+session_start();
 require_once '../vendor/autoload.php';
 require_once '../includes/functions/helpers.php';
 
+$helpers = new helpers();
+
 $loader = new Twig_Loader_Filesystem('../includes/templates');
 $twig = new Twig_Environment($loader);
+
 $template = $twig->load('manage_content.twig.html');
 
-$db = new database('test');
-$subjectAndPages = indexSubjectsAndPages($db);
-$selectedSubjectAndPage = selectedSubjectAndPage();
+$vars = $helpers->subjectsAndPages();
+$vars += $helpers->selectedSubjectAndPage();
+$vars += ["message" => $_SESSION['message']];
 
-echo $template->render([
-  "subjects" => $subjectAndPages[0], 
-  "pages" => $subjectAndPages[1],
-  "subject_id" => $selectedSubjectAndPage[0],
-  "page_id" => $selectedSubjectAndPage[1]
-]);
+echo $template->render($vars);
+
+$_SESSION['message'] = null;

@@ -7,3 +7,4 @@ $twig = new Twig_Environment($loader);
 
 $template = $twig->load('admin.twig.html');
 echo $template->render();
+

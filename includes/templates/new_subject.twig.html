@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ include("components/meta.twig.html") }}
+
+<body>
+    {{ include("components/header.twig.html") }}
+    <div class="main">
+        {{ include("components/nav.twig.html") }}
+        <div class="page">
+            <div>
+                {{ message ? message : '' }}
+            </div>
+            <h2>Create Subject</h2>
+            <form action="create_subject.php" method="post">
+                <p>
+                    Menu name:
+                    <input type="text" name="menu_name" value="" />
+                </p>
+                <p>
+                    Position:
+                    <select name="position">
+                        {% for subject in subjects %}
+                            <option value="{{loop.index + 1}}">{{loop.index + 1}}</option>
+                        {% endfor %}
+		            </select>
+                </p>
+                <p>
+                    Visible:
+                    <input type="radio" name="visible" value="0" /> No &nbsp;
+                    <input type="radio" name="visible" value="1" /> Yes
+                </p>
+                <input type="submit" name="submit" value="Create Subject" />
+            </form>
+            <br />
+            <a href="manage_content.php">Cancel</a>
+        </div>
+    </div>
+    {{ include("components/footer.twig.html") }}
+</body>
+
+</html>
