@@ -11,12 +11,15 @@
         <div class="page">
             <div>
                 <h2>{{ message ? message : 'Manage Content' }}</h2>
+                {% if currentPage %}
+                    <p>{{ currentPage }}</p>
+                {% elseif currentSubject %}
+                    <p>{{ currentSubject }}</p>
+                {% else %}
+                {% endif %}
             </div>
-            {% if currentPage %}
-                <p>{{ currentPage }}</p>
-            {% elseif currentSubject %}
-                <p>{{ currentSubject }}</p>
-            {% else %}
+            {% if subject_id and not page_id %}
+                <a href="edit_subject.php?subject={{subject_id}}">Edit Subject</a>
             {% endif %}
         </div>
     </div>

@@ -14,7 +14,7 @@ class helpers {
         $query .= "FROM subjects ";
         $query .= "WHERE visible = 1 ";
         $query .= "ORDER BY position ASC";
-        return $this->db->returnResults($query);
+        return $this->db->returnResultsIndexed($query, 'id');
     }
 
     function getPages ($id)

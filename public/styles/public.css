@@ -17,9 +17,40 @@ ul {
   list-style-type: none;
 }
 
+ol {
+    list-style-position: inside;
+}
+
 a {
   color: #777;
   text-decoration: none;
+}
+
+form > p {
+    margin-bottom: 14px;
+}
+
+.form-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+input[type=submit], .cancel {
+    text-align: center;
+    padding: 5px;
+    border-radius: 2px;
+    border: 1px solid #EEE;
+    cursor: pointer;
+    color: #777;
+    margin-right: 14px;
+    font-family: 'Montserrat';
+    font-size: 14px;
+    background: white;
+    transition: background 0.5s ease;
+}
+
+input[type=submit]:hover, .cancel:hover {
+    background: #EEE;
 }
 
 .container {
@@ -87,5 +118,9 @@ a {
 
 .selected > a {
   color: black;
+}
+
+.errors {
+    color: red;
 }
 
