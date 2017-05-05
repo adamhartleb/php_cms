@@ -8,21 +8,31 @@ class helpers {
         $this->db = new database('test');
     }
 
-    function getSubjects ()
+    function getSubjects ($admin = true)
     {
         $query  = "SELECT * ";
         $query .= "FROM subjects ";
-        $query .= "WHERE visible = 1 ";
+        if (!$admin)
+        {
+            $query .= "WHERE visible = 1 ";
+        }
         $query .= "ORDER BY position ASC";
         return $this->db->returnResultsIndexed($query, 'id');
     }
 
-    function getPages ($id)
+    function getPages ($id, $admin = true)
     {
         $query  = "SELECT * ";
         $query .= "FROM pages ";
-        $query .= "WHERE visible = 1 ";
-        $query .= "AND subject_id = {$id} ";
+        if (!$admin)
+        {
+            $query .= "WHERE visible = 1 ";
+            $query .= "AND subject_id = {$id} ";
+        }
+        else
+        {
+            $query .= "WHERE subject_id = {$id} ";
+        }
         $query .= "ORDER BY position ASC";
         return $this->db->returnResultsIndexed($query, 'id');
     }
@@ -89,13 +99,13 @@ class helpers {
         return $this->db->query($query);
     }
 
-    function subjectsAndPages ()
+    function subjectsAndPages ($admin = true)
     {
-        $subjects = $this->getSubjects();
+        $subjects = $this->getSubjects($admin);
 
         foreach ($subjects as $subject)
         {
-            $pages[$subject['id']] = $this->getPages($subject['id']);
+            $pages[$subject['id']] = $this->getPages($subject['id'], $admin);
         }
 
         return [ "subjects" => $subjects, "pages" => $pages];

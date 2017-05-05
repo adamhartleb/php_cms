@@ -1,0 +1,16 @@
+<div class="navigation">
+  <ul>
+    {% for subject in subjects %}
+      <li class="{{ subject.id == subject_id ? 'selected' : '' }}">
+        <a href="index.php?subject={{subject.id}}">{{ subject.menu_name }}</a>
+        <ul class="sub-navigation">
+          {% for page in pages[subject.id] %}
+            <li class="{{ page.id == page_id ? 'selected' : '' }}">
+              <a href="index.php?subject={{subject.id}}&page={{page.id}}">{{ page.menu_name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
