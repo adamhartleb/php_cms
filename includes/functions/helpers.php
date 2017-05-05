@@ -37,6 +37,31 @@ class helpers {
         return $this->db->query($query, $menu_name, $position, $visible);
     }
 
+    function updateSubject ($id, $menu_name, $position, $visible)
+    {
+		$query  = "UPDATE subjects SET ";
+		$query .= "menu_name = '{$menu_name}', ";
+		$query .= "position = {$position}, ";
+		$query .= "visible = {$visible} ";
+		$query .= "WHERE id = {$id} ";
+		$query .= "LIMIT 1";
+        return $this->db->query($query, $id, $menu_name, $position, $visible);
+    }
+
+    function deleteSubject ($id)
+    {
+        $query = "DELETE FROM subjects WHERE id = {$id} LIMIT 1";
+        return $this->db->query($query);
+    }
+
+    function subjectPagesExist ($id)
+    {
+        $query  = "SELECT * ";
+        $query .= "FROM pages ";
+        $query .= "WHERE subject_id = {$id} ";
+        return $this->db->query($query);
+    }
+
     function subjectsAndPages ()
     {
         $subjects = $this->getSubjects();

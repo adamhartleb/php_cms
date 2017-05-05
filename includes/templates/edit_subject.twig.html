@@ -15,7 +15,7 @@
                 </ol></div>
             {% endif %}
             <h2>Edit Subject: {{ subjects[subject_id].menu_name }}</h2>
-            <form action="create_subject.php" method="post">
+            <form action="edit_subject.php?subject={{subject_id}}" method="post">
                 <p>
                     Menu name:
                     <input type="text" name="menu_name" value="{{subjects[subject_id].menu_name}}" />

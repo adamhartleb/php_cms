@@ -19,7 +19,8 @@
                 {% endif %}
             </div>
             {% if subject_id and not page_id %}
-                <a href="edit_subject.php?subject={{subject_id}}">Edit Subject</a>
+                <a class="cancel" href="edit_subject.php?subject={{subject_id}}">Edit Subject</a>
+                <a class="cancel" href="delete_subject.php?subject={{subject_id}}">Delete Subject</a>
             {% endif %}
         </div>
     </div>
