@@ -12,25 +12,16 @@ if (isset($vars["subject_id"]) && $vars["subject_id"] !== "")
     if ($helpers->subjectPagesExist($vars["subject_id"])->num_rows > 0)
     {
         $_SESSION['message'] = "Cannot delete a subject with existing pages";
-        $helpers->redirectTo("manage_content.php");
     }
     else
     {
         $result = $helpers->deleteSubject($vars["subject_id"]);
 
-        if (mysqli_affected_rows($helpers->db) == 0)
-        {
-            $_SESSION['message'] = "Subject deletion failed!";
-            $helpers->redirectTo("manage_content.php");
-        }
-        else
-        {
-            $_SESSION['message'] = "Subject deleted!";
-            $helpers->redirectTo("manage_content.php");
-        }
+        $_SESSION['message'] =  $helpers->db->affected_rows == 0 
+            ? "Subject deletion failed!"
+            : "Subject deletion successful!";
     }
 }
-else
-{
-    $helpers->redirectTo("manage_content.php");
-}
+
+$helpers->redirectTo("manage_content.php");
+

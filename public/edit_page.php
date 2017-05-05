@@ -33,7 +33,7 @@ if (isset($_POST["submit"]))
 
     $result = $helpers->updatePage($vars["page_id"], $menu_name, $position, $visible, $content);  
 
-    if (mysqli_affected_rows($helpers->db) != 0)
+    if ($helpers->db->affected_rows != 0)
     {
         $_SESSION['message'] = "Page edited!";
         $helpers->redirectTo("manage_content.php");

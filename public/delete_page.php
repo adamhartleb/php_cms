@@ -10,18 +10,9 @@ if (isset($vars["page_id"]) && $vars["page_id"] !== "")
 {
     $result = $helpers->deletePage($vars["page_id"]);
 
-    if (mysqli_affected_rows($helpers->db) == 0)
-    {
-        $_SESSION['message'] = "Page deletion failed!";
-        $helpers->redirectTo("manage_content.php");
-    }
-    else
-    {
-        $_SESSION['message'] = "Page deleted!";
-        $helpers->redirectTo("manage_content.php");
-    }
+    $_SESSION['message'] =  $helpers->db->affected_rows == 0 
+        ? "Page deletion failed!"
+        : "Page deletion successful!";
 }
-else
-{
-    $helpers->redirectTo("manage_content.php");
-}
+
+$helpers->redirectTo("manage_content.php");

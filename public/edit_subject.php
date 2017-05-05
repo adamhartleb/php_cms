@@ -32,7 +32,7 @@ if (isset($_POST["submit"]))
 
     $result = $helpers->updateSubject($vars["subject_id"], $menu_name, $position, $visible);  
 
-    if ($result->num_rows != 0)
+    if ($helpers->db->affected_rows != 0)
     {
         $_SESSION['message'] = "Subject edited!";
         $helpers->redirectTo("manage_content.php");
