@@ -1,5 +1,5 @@
-{% set currentPage = pages[subject_id][page_id].menu_name %}
-{% set currentSubject = subjects[subject_id].menu_name %}
+{% set currentPage = pages[subject_id][page_id] %}
+{% set currentSubject = subjects[subject_id] %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +10,20 @@
         {{ include("components/nav.twig.html") }}
         <div class="page">
             <div>
-                <h2>{{ message ? message : 'Manage Content' }}</h2>
+                <h2 class="page-message">{{ message ? message : 'Manage Content' }}</h2>
                 {% if currentPage %}
-                    <p>{{ currentPage }}</p>
+                    <p>Menu Name: {{ currentPage.menu_name }}</p>
+                    <p>Position: {{ currentPage.position }}</p>
+                    <p>Visible: {{ currentPage.visible ? 'Yes' : 'No' }}</p>
+                    <p>
+                        Content:
+                        <br>
+                        <textarea rows="20" cols="100" disabled>{{ currentPage.content }}</textarea>
+                    </p>
                 {% elseif currentSubject %}
-                    <p>{{ currentSubject }}</p>
+                    <p>Menu Name: {{ currentSubject.menu_name }}</p>
+                    <p>Position: {{ currentSubject.position }}</p>
+                    <p>Visible: {{ currentSubject.visible ? 'Yes' : 'No' }}</p>
                 {% else %}
                 {% endif %}
             </div>

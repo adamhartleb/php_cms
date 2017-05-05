@@ -53,6 +53,10 @@ input[type=submit]:hover, .cancel:hover {
     background: #EEE;
 }
 
+textarea {
+    resize: none;
+}
+
 .container {
   width: 700px;
   margin: 0 auto;
@@ -112,6 +116,10 @@ input[type=submit]:hover, .cancel:hover {
   margin-bottom: 14px;
 }
 
+.page-message {
+    margin-bottom: 14px;
+}
+
 .selected {
   font-weight: bold;
 }
@@ -123,4 +131,3 @@ input[type=submit]:hover, .cancel:hover {
 .errors {
     color: red;
 }
-
