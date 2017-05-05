@@ -23,6 +23,12 @@
                     <p>
                         <textarea rows="20" cols="100" disabled>{{ currentPage.content }}</textarea>
                     </p>
+                {% elseif currentSubject and not page_id %}
+                    <ol>
+                        {% for page in pages[subject_id] %}
+                            <li><a href="index.php?subject={{subject_id}}&page={{page.id}}">{{ page.menu_name }}</a></li>
+                        {% endfor %}
+                    </ol>
                 {% endif %}
             </div>
         </div>
