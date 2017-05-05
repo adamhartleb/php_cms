@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ include("components/meta.twig.html") }}
+
+<body>
+    {{ include("components/header.twig.html") }}
+    <div class="main">
+        {{ include("components/nav.twig.html") }}
+        <div class="page">
+            {% if errors %}
+                <div><ol>
+                {% for error in errors %}
+                    <li class="errors">{{ error }}</li>
+                {% endfor %}
+                </ol></div>
+            {% endif %}
+            <h2>Edit Page: {{ pages[subject_id][page_id].menu_name }}</h2>
+            <form action="edit_page.php?subject={{subject_id}}&page={{page_id}}" method="post">
+                <p>
+                    Menu name:
+                    <input type="text" name="menu_name" value="{{pages[subject_id][page_id].menu_name}}" />
+                </p>
+                <p>
+                    Position:
+                    <select name="position">
+                        {% for page in pages %}
+                            <option 
+                                value="{{loop.index}}"
+                                {{ page_id == page.id ? 'selected' : '' }}>
+                                {{loop.index}}
+                            </option>
+                        {% endfor %}
+		            </select>
+                </p>
+                <p>
+                    Visible:
+                    <input
+                        {{ pages[subject_id][page_id].visible == 0 ? 'checked' : '' }}
+                        type="radio" name="visible" value="0" /> No &nbsp;
+                    <input
+                        {{ pages[subject_id][page_id].visible  == 1 ? 'checked' : '' }}
+                        type="radio" name="visible" value="1" /> Yes
+                </p>
+                <p>
+                    Content:
+                    <br>
+                    <textarea rows="20" cols="100" name="content">{{pages[subject_id][page_id].content}}</textarea>
+                </p>
+                <div class="form-buttons">
+                    <input type="submit" name="submit" value="Edit Page" />
+                    <a class="cancel" href="manage_content.php">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{ include("components/footer.twig.html") }}
+</body>
+
+</html>

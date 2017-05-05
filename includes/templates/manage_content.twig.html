@@ -18,7 +18,11 @@
                 {% else %}
                 {% endif %}
             </div>
-            {% if subject_id and not page_id %}
+            {% if subject_id and page_id %}
+                <a class="cancel" href="edit_page.php?subject={{subject_id}}&page={{page_id}}">Edit Page</a>
+                <a class="cancel" href="delete_page.php?page={{page_id}}">Delete Page</a>
+            {% elseif subject_id and not page_id %}
+                <a class="cancel" href="new_page.php?subject={{subject_id}}">New Page</a>
                 <a class="cancel" href="edit_subject.php?subject={{subject_id}}">Edit Subject</a>
                 <a class="cancel" href="delete_subject.php?subject={{subject_id}}">Delete Subject</a>
             {% endif %}

@@ -17,14 +17,15 @@ if (isset($vars["subject_id"]) && $vars["subject_id"] !== "")
     else
     {
         $result = $helpers->deleteSubject($vars["subject_id"]);
-        if ($result->num_rows != 0)
+
+        if (mysqli_affected_rows($helpers->db) == 0)
         {
-            $_SESSION['message'] = "Subject deleted!";
+            $_SESSION['message'] = "Subject deletion failed!";
             $helpers->redirectTo("manage_content.php");
         }
         else
         {
-            $_SESSION['message'] = "Subject deletion failed!";
+            $_SESSION['message'] = "Subject deleted!";
             $helpers->redirectTo("manage_content.php");
         }
     }
