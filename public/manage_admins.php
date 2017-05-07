@@ -12,3 +12,4 @@ $template = $twig->load('manage_admins.twig.html');
 $vars = $helpers->subjectsAndPages();
 
 echo $template->render($vars);
+

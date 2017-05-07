@@ -64,7 +64,6 @@ class helpers {
         $query .= ") VALUES (";
         $query .= "'{$username}', '{$password}'";
         $query .= ");";
-        error_log($query);
         return $this->db->query($query, $username, $password);
     }
 
