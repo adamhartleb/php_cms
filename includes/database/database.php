@@ -19,7 +19,7 @@ class database extends \mysqli
       }
 
       $sql = vsprintf($sql, $args);
-
+      
       $result = parent::query($sql);
       if (!$result)
       {

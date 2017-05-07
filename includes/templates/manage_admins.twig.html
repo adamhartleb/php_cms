@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ include("components/meta.twig.html") }}
+<body>
+  {{ include("components/header.twig.html") }}
+  <div class="main">
+    {{ include("components/nav.twig.html") }}
+    <div class="page">
+      <h2>Manage Admins</h2>
+      <form action='new_admin.php' method='post'>
+        <input type='text' name='username' placeholder='Username' />
+        <input type='password' name='password' placeholder='Password' />
+        <button class='cancel' type='submit'>Create Admin</button>
+      </form>
+    </div>
+  </div>
+  {{ include("components/footer.twig.html") }}
+</body>
+</html>

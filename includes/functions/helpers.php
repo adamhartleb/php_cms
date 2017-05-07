@@ -5,7 +5,7 @@ require_once dirname(__FILE__) . '/../database/database.php';
 class helpers {
     function __construct ()
     {
-        $this->db = new database('test');
+        $this->db = new database('widget_corp');
     }
 
     function getSubjects ($admin = true)
@@ -46,7 +46,8 @@ class helpers {
         $query .= ")";
         return $this->db->query($query, $menu_name, $position, $visible);
     }
-        function insertPage ($menu_name, $position, $visible, $content, $subjectID)
+
+    function insertPage ($menu_name, $position, $visible, $content, $subjectID)
     {
         $query  = "INSERT INTO pages (";
         $query .= "menu_name, subject_id, position, visible, content";
@@ -54,6 +55,17 @@ class helpers {
         $query .= "'{$menu_name}', {$subjectID}, {$position}, {$visible}, '{$content}'";
         $query .= ")";
         return $this->db->query($query, $menu_name, $subjectID, $position, $visible, $content);
+    }
+
+    function insertAdmin ($username, $password)
+    {
+        $query  = "INSERT INTO admins (";
+        $query .= "username, hashed_password";
+        $query .= ") VALUES (";
+        $query .= "'{$username}', '{$password}'";
+        $query .= ");";
+        error_log($query);
+        return $this->db->query($query, $username, $password);
     }
 
     function updateSubject ($id, $menu_name, $position, $visible)
