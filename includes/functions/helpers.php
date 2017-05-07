@@ -124,6 +124,12 @@ class helpers {
         return $this->db->query($query);
     }
 
+    function deleteAdmin ($id)
+    {
+        $query = "DELETE FROM admins WHERE id = {$id} LIMIT 1";
+        return $this->db->query($query);
+    }
+
     function subjectPagesExist ($id)
     {
         $query  = "SELECT * ";
