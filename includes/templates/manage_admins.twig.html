@@ -11,11 +11,20 @@
       {% if admins|length == 0 %}
         <p>There are currently no admins</p>
       {% else %}
-        <ol>
+        <div>
+          <div class="admin-list" style="color:black;">
+            <p><strong>Username</strong></p>
+            <p><strong>Action</strong></p>
+          </div>
           {% for admin in admins %}
-            <li><a href="#">{{ admin.username }}</a></li>
+            <div class="admin-list">
+              <p>{{ admin.username }}</p>
+              <div>
+                <a href="edit_admin.php?admin={{admin.id}}">Edit</a> | <a href="delete_admin.php?admin={{admin.id}}">Delete</a>
+              </div>
+            </div>
           {% endfor %}
-        </ol>
+        </div>
       {% endif %}
       <a class="cancel" href="create_admin.php">New Admin</a>
     </div>

@@ -43,6 +43,12 @@ class helpers {
         return $this->db->returnResultsIndexed($query, 'username');
     }
 
+    function getAdmin ($id)
+    {
+        $query = "SELECT username FROM ADMINS WHERE id = {$id}";
+        return $this->db->query($query)->fetch_assoc();
+    }
+
     function insertSubject ($menu_name, $position, $visible)
     {
         $query  = "INSERT INTO subjects (";
@@ -94,6 +100,16 @@ class helpers {
 		$query .= "WHERE id = {$id} ";
 		$query .= "LIMIT 1";
         return $this->db->query($query, $id, $content, $menu_name, $position, $visible);
+    }
+
+    function updateAdmin ($id, $username, $password)
+    {
+        $query = "UPDATE admins SET ";
+        $query .= "username = '{$username}', ";
+        $query .= "hashed_password = '{$password}' ";
+        $query .= "WHERE id = {$id} ";
+        $query .= "LIMIT 1";
+        return $this->db->query($query, $id, $username, $password);
     }
 
     function deleteSubject ($id)
