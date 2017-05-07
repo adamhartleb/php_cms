@@ -9,6 +9,8 @@ $template = $twig->load('admin.twig.html');
 
 $helpers = new helpers();
 
+$helpers->checkLogin($_COOKIE['admin_id']);
+
 $vars = $helpers->subjectsAndPages();
 
 echo $template->render($vars);

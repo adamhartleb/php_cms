@@ -4,6 +4,8 @@ require_once '../includes/functions/helpers.php';
 
 $helpers = new helpers();
 
+$helpers->checkLogin($_COOKIE['admin_id']);
+
 $vars = $helpers->selectedSubjectAndPage();
 
 if (isset($vars["page_id"]) && $vars["page_id"] !== "")

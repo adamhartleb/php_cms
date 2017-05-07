@@ -9,6 +9,8 @@ $template = $twig->load('new_subject.twig.html');
 
 $helpers = new helpers();
 
+$helpers->checkLogin($_COOKIE['admin_id']);
+
 $vars = $helpers->subjectsAndPages();
 $vars += $helpers->selectedSubjectAndPage();
 $vars += ["message" => $_SESSION["message"], "errors" => $_SESSION["errors"]];

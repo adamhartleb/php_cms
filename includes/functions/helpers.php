@@ -176,6 +176,14 @@ class helpers {
         }
     }
 
+    function checkLogin ($loggedIn)
+    {
+        if (!isset($loggedIn))
+        {
+            $this->redirectTo('admin_login.php');
+        }
+    }
+
     function prettyPrint ($data)
     {
         echo "<pre>";

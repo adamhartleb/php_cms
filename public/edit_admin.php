@@ -7,6 +7,8 @@ require_once '../includes/functions/validation.php';
 $helpers = new helpers();
 $validation = new validation();
 
+$helpers->checkLogin($_COOKIE['admin_id']);
+
 $loader = new Twig_Loader_Filesystem('../includes/templates');
 $twig = new Twig_Environment($loader);
 $template = $twig->load('edit_admin.twig.html');

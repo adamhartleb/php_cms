@@ -29,6 +29,7 @@ if (isset($_POST['submit']))
 
   if ($result)
   {
+    setcookie("admin_id", "true");
     $helpers->redirectTo("manage_admins.php");
   }
   else
@@ -39,7 +40,7 @@ if (isset($_POST['submit']))
 
 }
 
-$vars = $helpers->subjectsAndPages();
+$vars = $helpers->subjectsAndPages(false);
 $vars += [ "errors" => $_SESSION['errors'] ];
 
 echo $template->render($vars);

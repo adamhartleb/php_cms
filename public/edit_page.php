@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once '../vendor/autoload.php';
 require_once '../includes/functions/helpers.php';
 require_once '../includes/functions/validation.php';
@@ -10,6 +11,8 @@ $template = $twig->load('edit_page.twig.html');
 
 $helpers = new helpers();
 $validation = new validation();
+
+$helpers->checkLogin($_COOKIE['admin_id']);
 
 $vars = $helpers->subjectsAndPages();
 $vars += $helpers->selectedSubjectAndPage();

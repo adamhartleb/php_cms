@@ -5,6 +5,8 @@ require_once '../includes/functions/validation.php';
 
 $helpers = new helpers();
 
+$helpers->checkLogin($_COOKIE['admin_id']);
+
 $vars = $helpers->selectedSubjectAndPage();
 
 if (isset($vars["subject_id"]) && $vars["subject_id"] !== "")

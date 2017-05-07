@@ -11,6 +11,8 @@ $template = $twig->load('edit_subject.twig.html');
 $helpers = new helpers();
 $validation = new validation();
 
+$helpers->checkLogin($_COOKIE['admin_id']);
+
 $vars = $helpers->subjectsAndPages();
 $vars += $helpers->selectedSubjectAndPage();
 $vars += ["message" => $_SESSION["message"], "errors" => $_SESSION["errors"]];

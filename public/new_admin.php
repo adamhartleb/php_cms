@@ -7,6 +7,8 @@ require_once '../includes/functions/validation.php';
 $helpers = new helpers();
 $validation = new validation();
 
+$helpers->checkLogin($_COOKIE['admin_id']);
+
 if (isset($_POST['username']) && isset($_POST['password']))
 {
   $username = $_POST["username"];

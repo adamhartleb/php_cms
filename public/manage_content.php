@@ -5,6 +5,8 @@ require_once '../includes/functions/helpers.php';
 
 $helpers = new helpers();
 
+$helpers->checkLogin($_COOKIE['admin_id']);
+
 $loader = new Twig_Loader_Filesystem('../includes/templates');
 $twig = new Twig_Environment($loader);
 
