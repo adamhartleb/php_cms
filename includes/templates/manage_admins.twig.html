@@ -6,12 +6,18 @@
   <div class="main">
     {{ include("components/nav.twig.html") }}
     <div class="page">
-      <h2>Manage Admins</h2>
-      <form action='new_admin.php' method='post'>
-        <input type='text' name='username' placeholder='Username' />
-        <input type='password' name='password' placeholder='Password' />
-        <button class='cancel' type='submit'>Create Admin</button>
-      </form>
+      <h2>{{ message ? message : 'Manage Admins' }}</h2>
+      <p>Current Admins:</p>
+      {% if admins|length == 0 %}
+        <p>There are currently no admins</p>
+      {% else %}
+        <ol>
+          {% for admin in admins %}
+            <li><a href="#">{{ admin.username }}</a></li>
+          {% endfor %}
+        </ol>
+      {% endif %}
+      <a class="cancel" href="create_admin.php">New Admin</a>
     </div>
   </div>
   {{ include("components/footer.twig.html") }}

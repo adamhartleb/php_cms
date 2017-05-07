@@ -7,13 +7,12 @@ $helpers = new helpers();
 
 $loader = new Twig_Loader_Filesystem('../includes/templates');
 $twig = new Twig_Environment($loader);
-$template = $twig->load('manage_admins.twig.html');
+$template = $twig->load('new_admin.twig.html');
 
 $vars = $helpers->subjectsAndPages();
-$vars += ["admins" => $helpers->getAdmins()];
-$vars += ["message" => $_SESSION["message"]];
+$vars += [ "errors" => $_SESSION["errors"] ];
 
 echo $template->render($vars);
 
-$_SESSION['message'] = null;
+$_SESSION["errors"] = null;
 

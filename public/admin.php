@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once '../vendor/autoload.php';
 require_once '../includes/functions/helpers.php';
 
@@ -11,11 +11,6 @@ $helpers = new helpers();
 
 $vars = $helpers->subjectsAndPages();
 
-if (isset($_SESSION['message']))
-{
-  $vars += [ "message" => $_SESSION['message'] ];
-}
-
 echo $template->render($vars);
 
-$_SESSION['message'] = null;
+

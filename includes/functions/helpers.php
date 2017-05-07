@@ -37,6 +37,12 @@ class helpers {
         return $this->db->returnResultsIndexed($query, 'id');
     }
 
+    function getAdmins ()
+    {
+        $query = "SELECT * FROM ADMINS";
+        return $this->db->returnResultsIndexed($query, 'username');
+    }
+
     function insertSubject ($menu_name, $position, $visible)
     {
         $query  = "INSERT INTO subjects (";

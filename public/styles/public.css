@@ -131,3 +131,14 @@ textarea {
 .errors {
     color: red;
 }
+
+.flex-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.flex-form > input {
+  padding: 8px;
+  margin-bottom: 14px;
+}

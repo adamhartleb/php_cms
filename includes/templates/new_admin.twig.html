@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+{{ include("components/meta.twig.html") }}
+<body>
+  {{ include("components/header.twig.html") }}
+  <div class="main">
+    {{ include("components/nav.twig.html") }}
+    <div class="page">
+      {% if errors|length != 0 %}
+        <ol>
+          {% for error in errors %}
+            <li class="errors">{{ error }}</li>
+          {% endfor %}
+        </ol>
+      {% endif %}
+      <h2>Manage Admins</h2>
+      <form action='new_admin.php' method='post'>
+        <div class='flex-form'>
+          <input type='text' name='username' placeholder='Username' />
+          <input type='password' name='password' placeholder='Password' />
+          <input type='password' name='verify_password' placeholder='Verify Password' />
+        </div>
+          <button class='cancel' type='submit'>Create Admin</button>
+          <a class="cancel" href="manage_admins.php">Cancel</a>
+      </form>
+    </div>
+  </div>
+  {{ include("components/footer.twig.html") }}
+</body>
+</html>
