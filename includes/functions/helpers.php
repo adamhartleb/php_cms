@@ -159,6 +159,23 @@ class helpers {
         return [ "subject_id" => $_GET['subject'], "page_id" => $_GET['page']];
     }
 
+    function attemptLogin ($username, $password)
+    {
+        $query = "SELECT * FROM ADMINS WHERE username = '{$username}'";
+        $result = $this->db->query($query, $username)->fetch_assoc();
+
+        $hash = $result['hashed_password'];
+
+        if ($result && password_verify($password, $hash))
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     function prettyPrint ($data)
     {
         echo "<pre>";
