@@ -71,12 +71,14 @@ class helpers {
 
     function insertAdmin ($username, $password)
     {
+        $hashed_password = password_hash($password, 1);
+
         $query  = "INSERT INTO admins (";
         $query .= "username, hashed_password";
         $query .= ") VALUES (";
-        $query .= "'{$username}', '{$password}'";
+        $query .= "'{$username}', '{$hashed_password}'";
         $query .= ");";
-        return $this->db->query($query, $username, $password);
+        return $this->db->query($query, $username, $hashed_password);
     }
 
     function updateSubject ($id, $menu_name, $position, $visible)
@@ -104,12 +106,14 @@ class helpers {
 
     function updateAdmin ($id, $username, $password)
     {
+        $hashed_password = password_hash($password, 1);
+
         $query = "UPDATE admins SET ";
         $query .= "username = '{$username}', ";
-        $query .= "hashed_password = '{$password}' ";
+        $query .= "hashed_password = '{$hashed_password}' ";
         $query .= "WHERE id = {$id} ";
         $query .= "LIMIT 1";
-        return $this->db->query($query, $id, $username, $password);
+        return $this->db->query($query, $id, $username, $hashed_password);
     }
 
     function deleteSubject ($id)
