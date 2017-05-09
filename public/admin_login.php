@@ -30,7 +30,7 @@ if (isset($_POST['submit']))
   if ($result)
   {
     setcookie("admin_id", "true");
-    $helpers->redirectTo("manage_admins.php");
+    $helpers->redirectTo("admin.php");
   }
   else
   {
